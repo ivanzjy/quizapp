@@ -1,0 +1,5 @@
+quizzes -
+questions - what is 2+2
+results
+answer
+quiz_user - intermediate table, which user is assigned to which quiz
