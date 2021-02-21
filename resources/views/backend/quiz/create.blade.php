@@ -3,6 +3,7 @@
 @section('content')
     <div class="span9">
         <div class="content">
+            <form action="{{route('quiz.store')}}" method="POST">@csrf
             <div class="module">
                 <div class="module-head">
                     <h3>Create a quiz</h3>
@@ -13,6 +14,8 @@
                         <div class="controls">
                             <input type="text" name="name" class="span8" placeholder="name of quiz"
                                    value="{{old('name')}}">
+
+
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,6 +50,7 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 @endsection
