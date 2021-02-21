@@ -21,7 +21,6 @@
                                     <th>Minutes</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
-                                    <th>View</th>
                                 </tr>
                                 @if(count($quizzes)>0)
                                     @foreach($quizzes as $key=>$quiz)
@@ -36,13 +35,19 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{route('quiz.destroy',[$quiz->id])}}"></a>
-                                                <button class="btn btn-danger">Delete</button>
-
-                                            </td>
-                                            <td>
-                                                <a href="{{route('quiz.show',[$quiz->id])}}"></a>
-                                                <button class="btn btn-primary">Delete</button>
+                                                <form id="delete-form{{$quiz->id}}"
+                                                      action="{{route('quiz.destroy',[$quiz->id])}}" method="POST">@csrf
+                                                    {{method_field('DELETE')}}
+                                                </form>
+                                                <a href="#" onclick="if(confirm('Do you want to delete')){
+                                                    Event.preventDefault();
+                                                    document.getElementById('delete-form{{$quiz->id}}').submit()
+                                                    }else{
+                                                    Event.preventDefault();
+                                                    }
+                                                    ">
+                                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

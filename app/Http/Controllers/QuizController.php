@@ -92,7 +92,7 @@ class QuizController extends Controller
         $data = $this->validateForm($request);
 //        $quiz = Quiz::find($id);
         $quiz = (new Quiz)->updateQuiz($data, $id);
-        return redirect()->route('quiz.index')->with('message', 'Quiz updated');
+        return redirect()->route('quiz.index')->with('message', 'Quiz updated!');
     }
 
     /**
@@ -103,8 +103,7 @@ class QuizController extends Controller
      */
     public function destroy($id)
     {
-        //
-        return "destroy";
-
+        (new Quiz)->deleteQuiz($id);
+        return redirect()->route('quiz.index')->with('message', 'Quiz Deleted!');
     }
 }
