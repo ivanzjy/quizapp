@@ -23,7 +23,7 @@
                                         <strong>{{ $message }}</strong>
                             </span>
                                 @enderror
-                            </div>1
+                            </div>
 
 
                             {{-- Question name--}}
