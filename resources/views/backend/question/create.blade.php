@@ -25,19 +25,12 @@
                                 @enderror
                             </div>
 
-
                             {{-- Question name--}}
-                            <label for="" class="control-label">Question Name</label>
                             <div class="control-group">
-                                <label for="" class="control-label" for="options">Options</label>
+                                <label for="" class="control-label">Question Name</label>
                                 <div class="controls">
-                                    @for($i=0;$i<4;$i++)
-                                        <input type="text" name="options[$i]" class="span7"
-                                               placeholder="option {{$i+1}}"
-                                               required="";>
-                                        <input type="radio" name="correctAnswer" value="{{$i}}">
-                                        <span>Is the correct answer</span>
-                                    @endfor
+                                    <input type="text" name="question" class="span8" placeholder="name of question"
+                                           value="{{old('question')}}">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,13 +39,32 @@
                                 </div>
                             </div>
 
-
-                        </div>
-                        <div class="controls">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            {{-- Question optons--}}
+                            <div class="control-group">
+                                <label for="" class="control-label">Question Name</label>
+                                <div class="control-group">
+                                    <label for="" class="control-label" for="options">Options</label>
+                                    <div class="controls">
+                                        @for($i=0;$i<4;$i++)
+                                            <input type="text" name="options[$i]" class="span7"
+                                                   placeholder="option {{$i+1}}"
+                                                   required="" ;>
+                                            <input type="radio" name="correctAnswer" value="{{$i}}">
+                                            <span>Is the correct answer</span>
+                                        @endfor
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     </div>
