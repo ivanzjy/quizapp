@@ -32,10 +32,18 @@ class Question extends Model
         $data['quiz_id'] =$data['quiz'];
         return Question::create($data);
                 print('question saved');
-
     }
     public function getQuestions(){
         // with quiz is coming from quiz model above
         return self::orderBy('created_at', $this->order)->with('quiz')->paginate($this->limit);
     }
+
+    public function getQuizById($id){
+        return Quiz::find($id);
+        }
+    public function getQuestionById($id){
+        return Question::find($id);
+    }
+
+
 }
