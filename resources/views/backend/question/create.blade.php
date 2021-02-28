@@ -28,7 +28,7 @@
 
                                 </select>
                             </div>
-                            @error('question')
+                            @error('quiz')
                             <span class="invalid-feedback" role="alert">
 			                    <strong>{{ $message }}</strong>
 			                </span>
@@ -40,7 +40,7 @@
                             <label class="control-label" for="name">Question name</label>
                             <div class="controls">
                                 <input type="text" name="question" class="span8 @error('name') border-red @enderror"
-                                       placeholder="name of a quiz" value=" {{old('question')}}">
+                                       placeholder="name of a quiz" value="{{old('question')}}">
                             </div>
                             @error('question')
                             <span class="invalid-feedback" role="alert">
@@ -57,13 +57,12 @@
                                 @for($i=0;$i<4;$i++)
                                     <input type="text" name="options[]"
                                            class="span7 @error('name') border-red @enderror"
-                                           placeholder=" options{{$i+1}}" required="">
-
+                                           placeholder="options {{$i+1}}" required="">
                                     <input type="radio" name="correct_answer" value="{{$i}}">
                                     <span>Is correct answer</span>
                                 @endfor
                             </div>
-                            @error('question')
+                            @error('options')
                             <span class="invalid-feedback" role="alert">
 			                    <strong>{{ $message }}</strong>
 			                    </span>
@@ -75,18 +74,10 @@
                             <div class="controls">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
-
             </form>
-
-
         </div>
     </div>
-
-
 @endsection

@@ -15,6 +15,8 @@ class Question extends Model
         'question',
         'quiz_id'
     ];
+    private $limit=1; // limit data per page
+    private $order = 'DESC';
 
     // Questions have answers
     public function answers(){
@@ -31,5 +33,9 @@ class Question extends Model
         return Question::create($data);
                 print('question saved');
 
+    }
+    public function getQuestions(){
+        // with quiz is coming from quiz model above
+        return self::orderBy('created_at', $this->order)->with('quiz')->paginate($this->limit);
     }
 }

@@ -17,7 +17,8 @@ class QuestionController extends Controller
     public function index()
     {
         //
-        return view('backend.question.index');
+        $questions = (new Question)->getQuestions(); //        return view('backend.question.index', compact('question'));
+        return view('backend.question.index', compact('questions'));
     }
 
     /**
@@ -99,4 +100,7 @@ class QuestionController extends Controller
     {
         //
     }
+
+
+
 }
