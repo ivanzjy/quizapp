@@ -86,9 +86,12 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( $id)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $this->validateForm($request);
+        $question = (new Question)->updateQuestion($id,$request);
+        $answer = (new Answer)->updateAnswer($request,$question);
+        return redirect()->route('question.show', $id)->with('message','Question Updated Successfully');
     }
 
     /**

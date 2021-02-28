@@ -33,4 +33,12 @@ class Answer extends Model
             ]);
         }
     }
+
+    public function deleteAnswer($questionId){
+        Answer::where('question_id', $questionId)->delete();
+    }
+    public function updateAnswer($data, $question){
+        $this->deleteAnswer($question->id);
+        $this->storeAnswers($data,$question);
+    }
 }

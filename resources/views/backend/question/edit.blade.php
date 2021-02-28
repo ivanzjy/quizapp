@@ -22,7 +22,7 @@
                             <div class="controls">
                                 <select name="quiz" class="span8 ">
                                     @foreach(\App\Models\Quiz::all() as $quiz)
-                                        <option value="{{$quiz->name}}"
+                                        <option value="{{$quiz->id}}"
                                                 {{--select value on quiz--}}
                                             @if($quiz->id==$question->quiz_id)selected
                                             @endif
