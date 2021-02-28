@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Quiz;
@@ -54,7 +53,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = (new Question)->getQuestionById($id);
+        $question = (new Question)->findQuestion($id);
         return view('backend.question.show', compact('question'));
     }
 
@@ -66,7 +65,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = (new Question)->findQuestion($id);
+        return view('backend.question.edit', compact('question'));
     }
     public function validateForm($request){
         // quiz, questions, options, and correct_answer are all input name
@@ -86,7 +86,7 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( $id)
     {
         //
     }
