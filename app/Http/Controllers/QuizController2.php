@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Quiz;
 use Illuminate\Http\Request;
-
-class QuizController extends Controller
+use App\Quiz;
+class QuizCOntroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = (new Quiz)->allQuiz();
-        return view('backend.quiz.index', compact('quizzes'));
+        return view('backend.quiz.index',compact('quizzes'));
     }
 
     /**
@@ -31,78 +30,80 @@ class QuizController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-
-    public function validateForm(Request $request)
-    {
-        return $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required',
-            'minutes' => 'required|integer'
-        ]);
-    }
-
     public function store(Request $request)
     {
         $data = $this->validateForm($request);
+
         $quiz = (new Quiz)->storeQuiz($data);
-        return redirect()->route('quiz.index')->with('message', 'Quiz created');
+        return redirect()->back()->with('message','Quiz created Successfully');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        return "show";
-    }
-    public function question($id){
-        $quizzes = Quiz::with('questions')->where('id',$id)->get();
-        return view('backend.quiz.question', compact('quizzes'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $quiz = Quiz::find($id);
-        return view('backend.quiz.edit', compact('quiz'));
+        $quiz = (new Quiz)->editQuiz($id);
+        return view('backend.quiz.edit',compact('quiz'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data = $this->validateForm($request);
-//        $quiz = Quiz::find($id);
-        $quiz = (new Quiz)->updateQuiz($data, $id);
-        return redirect()->route('quiz.index')->with('message', 'Quiz updated!');
+        $quiz = (new Quiz)->updateQuiz($id,$data);
+        return redirect(route('quiz.index'))->with('message','Quiz updated Successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         (new Quiz)->deleteQuiz($id);
-        return redirect()->route('quiz.index')->with('message', 'Quiz Deleted!');
+        return redirect(route('quiz.index'))->with('message','Quiz deleted Successfully!');
+
+    }
+
+    public function question($id){
+        $quizzes = Quiz::with('questions')->where('id',$id)->get();
+        return view('backend.quiz.question',compact('quizzes'));
+    }
+
+    public function validateForm($request){
+        return $this->validate($request,[
+
+            'name'=>'required|string',
+            'description'=>'required|min:3|max:500',
+            'minutes'=>'required|integer'
+        ]);
+
     }
 }

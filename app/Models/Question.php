@@ -38,7 +38,7 @@ class Question extends Model
         return Question::orderBy('created_at', $this->order)->with('quiz')->paginate($this->limit);
     }
 
-    public function getQuestionById($id){
+    public function getQuestion($id){
         return Question::find($id);
     }
 
