@@ -15,7 +15,7 @@ class Question extends Model
         'question',
         'quiz_id'
     ];
-    private $limit=1; // limit data per page
+    private $limit=10; // limit data per page
     private $order = 'DESC';
 
     // Questions have answers
@@ -52,5 +52,7 @@ class Question extends Model
         $question->save();
         return $question;
     }
-
+    public function deleteQuestion($id){
+        Question::where('id',$id)->delete();
+    }
 }

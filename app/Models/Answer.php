@@ -38,6 +38,7 @@ class Answer extends Model
         Answer::where('question_id', $questionId)->delete();
     }
     public function updateAnswer($data, $question){
+        // to update answers, we first need to delete all answers related to the question ID
         $this->deleteAnswer($question->id);
         $this->storeAnswers($data,$question);
     }

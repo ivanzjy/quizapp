@@ -8,40 +8,46 @@
             @endif
             <div class="module">
                 <div class="module-head">
-                    <h3>All Quizzes</h3>
+                    <h3>All Questions</h3>
                     <div class="module-body">
                         <table class="table table-striped">
                             <thread>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Minutes</th>
+                                    <th>Question</th>
+                                    <th>Quiz</th>
+                                    <th>Created</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                             </thread>
-                            <tbody>
-                            @if(count($quizzes)>0)
-                                @foreach($quizzes as $key=>$quiz)
+                            </tbody>
+                            @if(count($questions)>0)
+                                @foreach($questions as $key=>$question)
                                     <tr>
-                                        <td>{{$quiz->id}}</td>
-                                        <td>{{$quiz->name}}</td>
-                                        <td>{{$quiz->description}}</td>
-                                        <td>{{$quiz->minutes}}</td>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$question->question}}</td>
+                                        <td>{{$question->quiz->name}}</td>
+                                        <td>{{date('F d,Y',strtotime($question->created_at))}}</td>
                                         <td>
-                                            <a href="{{route('quiz.edit',[$quiz->id])}}">
+                                            <a href="{{route('question.show',[$question->id])}}">
+                                                <button class="btn btn-primary">View</button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('question.edit',[$question->id])}}">
                                                 <button class="btn btn-primary">Edit</button>
                                             </a>
                                         </td>
                                         <td>
-                                            <form id="delete-form{{$quiz->id}}"
-                                                  action="{{route('quiz.destroy',[$quiz->id])}}" method="POST">@csrf
+                                            <form id="delete-form{{$question->id}}" method="POST"
+                                                  action="{{route('question.destroy',[$question->id])}}">@csrf
                                                 {{method_field('DELETE')}}
                                             </form>
                                             <a href="#" onclick="if(confirm('Do you want to delete')){
                                                 event.preventDefault();
-                                                document.getElementById('delete-form{{$quiz->id}}').submit()
+                                                document.getElementById('delete-form{{$question->id}}').submit()
                                                 }else{
                                                 event.preventDefault();
                                                 }
@@ -52,14 +58,16 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <td>No Quizzes to display</td>
-                            @endif
-                            </tbody>
+                                <td>No Question to display</td>
+                                @endif
+                                </tbody>
                         </table>
+                        <div class="pagination pagination-centered"
+                        {{$questions->links()}}
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
     </div>
 @endsection

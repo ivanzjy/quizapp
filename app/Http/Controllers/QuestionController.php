@@ -102,7 +102,11 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete questions
+        (new question)->deleteQuestion($id);
+        // Delete answers
+        (new Answer)->deleteAnswer($id);
+        Return redirect()->route('question.index')->with('message' ,' Question Deleted Successfully');
     }
 
 
