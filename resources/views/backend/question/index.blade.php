@@ -28,7 +28,7 @@
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{$question->question}}</td>
-                                        <td>{{$question->quiz->name}}</td>
+                                        <td>{{$question->quiz}}</td>
                                         <td>{{date('F d,Y',strtotime($question->created_at))}}</td>
                                         <td>
                                             <a href="{{route('question.show',[$question->id])}}">
