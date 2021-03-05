@@ -20,7 +20,11 @@
                                     <th>Occupation</th>
                                     <th>Address</th>
                                     <th>Phone</th>
+                                    <th>Join Date</th>
                                     <th></th>
+                                    <th></th>
+                                    <th></th>
+
                                 </tr>
                             </thread>
                             <tbody>
@@ -34,20 +38,21 @@
                                         <td>{{$user->occupation}}</td>
                                         <td>{{$user->address}}</td>
                                         <td>{{$user->phone}}</td>
+
                                         <td>{{date('F d,Y',strtotime($user->created_at))}}</td>
                                         <td>
-                                            <a href="{{route('question.show',[$user->id])}}">
+                                            <a href="{{route('user.show',[$user->id])}}">
                                                 <button class="btn btn-primary">View</button>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('question.edit',[$user->id])}}">
+                                            <a href="{{route('user.edit',[$user->id])}}">
                                                 <button class="btn btn-primary">Edit</button>
                                             </a>
                                         </td>
                                         <td>
                                             <form id="delete-form{{$user->id}}" method="POST"
-                                                  action="{{route('question.destroy',[$user->id])}}">@csrf
+                                                  action="{{route('user.destroy',[$user->id])}}">@csrf
                                                 {{method_field('DELETE')}}
                                             </form>
                                             <a href="#" onclick="if(confirm('Do you want to delete')){

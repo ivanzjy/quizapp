@@ -9,8 +9,6 @@
             @endif
             <form action="{{route('question.update',[$question->id])}}" method="POST">@csrf
                 {{method_field('PUT')}}
-
-
                 <div class="module">
                     <div class="module-head">
                         <h3>Edit Question</h3>
