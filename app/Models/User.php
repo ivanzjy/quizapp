@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -27,6 +25,7 @@ class User extends Authenticatable
         'is_admin'
     ];
 
+    private $limit= 10;
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -45,4 +44,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function storeUser($data){
+        $data['visible_password'] = $data['password'];
+        $data['password'] = bcrypt($data['password']);
+        $data['is_admin']=0;
+        return User::create($data);
+
+    }
+
+    public function allUsers(){
+        return User::latest()->paginate($this->limit);
+    }
 }
