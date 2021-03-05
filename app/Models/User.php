@@ -74,6 +74,10 @@ class User extends Authenticatable
     }
     public function deleteUser($id)
     {
+////        Disable admins from deleting themselves
+//        if(auth()->user()->id==$id){
+//            return redirect()->back('message','You cannot delete yourself');
+//        }
         User::find($id)->delete();
     }
 }
