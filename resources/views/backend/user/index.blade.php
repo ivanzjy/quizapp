@@ -41,11 +41,6 @@
 
                                         <td>{{date('F d,Y',strtotime($user->created_at))}}</td>
                                         <td>
-                                            <a href="{{route('user.show',[$user->id])}}">
-                                                <button class="btn btn-primary">View</button>
-                                            </a>
-                                        </td>
-                                        <td>
                                             <a href="{{route('user.edit',[$user->id])}}">
                                                 <button class="btn btn-primary">Edit</button>
                                             </a>

@@ -24,7 +24,6 @@ class User extends Authenticatable
         'phone',
         'is_admin'
     ];
-
     private $limit= 10;
     /**
      * The attributes that should be hidden for arrays.
@@ -72,5 +71,9 @@ class User extends Authenticatable
         $user -> phone = $data['phone'];
         $user->save();
         return $user;
+    }
+    public function deleteUser($id)
+    {
+        User::find($id)->delete();
     }
 }
