@@ -17,16 +17,17 @@ Route::get('/', function () {
     return view('admin.index');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('quiz','QuizController');
-Route::resource('question','QuestionController');
-Route::get('quiz/{id}/questions', 'QuizController@question')->name('quiz.question');
-Route::resource('user','UserController');
+Route::group(['middleware' => 'isAdmin'], function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    });
+    Route::resource('quiz', 'QuizController');
+    Route::resource('question', 'QuestionController');
+    Route::resource('user', 'UserController');
+    Route::get('quiz/{id}/questions', 'QuizController@question')->name('quiz.question');
+});
 
 
